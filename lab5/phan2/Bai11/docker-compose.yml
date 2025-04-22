@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: mydb                # Tạo database
+      POSTGRES_USER: user              # Tạo user
+      POSTGRES_PASSWORD: password      # Mật khẩu user
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Lưu trữ dữ liệu
+    networks:
+      - app_network
+
+  adminer:
+    image: adminer:latest
+    ports:
+      - "8083:8080"                    # Truy cập Adminer qua cổng 8083
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres  # Kết nối đến PostgreSQL service
+      ADMINER_DEFAULT_USERNAME: user    # Tài khoản PostgreSQL
+      ADMINER_DEFAULT_PASSWORD: password
+    depends_on:
+      - postgres
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:                        # Volume cho PostgreSQL
+
+networks:
+  app_network:                          # Mạng riêng cho các service

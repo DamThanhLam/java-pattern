@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  node-app:
+    build: .  # Build từ Dockerfile trong thư mục hiện tại
+    ports:
+      - "3000:3000"  # Map cổng host:container
+    volumes:
+      - .:/app       # Mount code từ host vào container (tùy chọn)
+      - /app/node_modules  # Tránh ghi đè node_modules

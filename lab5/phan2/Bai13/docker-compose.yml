@@ -1,0 +1,6 @@
+version: '3.8'
+services:
+  react-app:
+    build: .  # Build từ Dockerfile
+    ports:
+      - "8080:80"  # Map cổng 8080 (host) → 80 (container)

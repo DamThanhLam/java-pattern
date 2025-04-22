@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  container1:
+    image: alpine:latest
+    command: tail -f /dev/null  # Giữ container chạy vô hạn
+    networks:
+      - private_network
+
+  container2:
+    image: alpine:latest
+    command: tail -f /dev/null
+    networks:
+      - private_network
+
+networks:
+  private_network:  # Tạo mạng tùy chỉnh
+    driver: bridge
