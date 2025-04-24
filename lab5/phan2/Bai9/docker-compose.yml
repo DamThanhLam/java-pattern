@@ -1,0 +1,6 @@
+version: '3.8'
+services:
+  flask-app:
+    build: .          # Build từ Dockerfile
+    ports:
+      - "5001:5000"   # Map cổng 5000 (host) → 5000 (container)

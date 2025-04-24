@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword  # Mật khẩu root
+      MYSQL_DATABASE: mydb               # Tạo database
+      MYSQL_USER: user                   # Tạo user
+      MYSQL_PASSWORD: password           # Mật khẩu user
+    volumes:
+      - mysql_data:/var/lib/mysql        # Lưu trữ dữ liệu MySQL
+    networks:
+      - app_network                      # Kết nối mạng
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"                        # Map cổng 8081 (host) → 80 (container)
+    environment:
+      PMA_HOST: mysql                    # Trỏ đến service MySQL
+      PMA_USER: root                     # Sử dụng root để đăng nhập
+      PMA_PASSWORD: rootpassword         # Mật khẩu root của MySQL
+    depends_on:
+      - mysql                            # Khởi động sau MySQL
+    networks:
+      - app_network                      # Kết nối mạng
+
+volumes:
+  mysql_data:                            # Volume cho MySQL
+
+networks:
+  app_network:                          # Tạo mạng tùy chỉnh

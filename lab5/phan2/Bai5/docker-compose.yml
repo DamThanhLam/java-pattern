@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:latest    # Sử dụng image Redis mới nhất
+    ports:
+      - "6379:6379"       # Map cổng host:container
+    volumes:
+      - redis_data:/data  # Lưu trữ dữ liệu Redis (tùy chọn)
+
+volumes:
+  redis_data:             # Tạo volume để lưu dữ liệu
